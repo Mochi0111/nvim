@@ -1,0 +1,158 @@
+-- =============== Lazy.nvim を読み込む ===============
+vim.opt.rtp:prepend("~/.local/share/nvim/lazy/lazy.nvim")
+vim.opt.clipboard = "unnamedplus"
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.o.termguicolors = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+local keymap = vim.keymap.set
+keymap("i", "<S-Tab>", "<C-d>")
+keymap("n", "<Space>", "<Nop>", {silent = true})
+keymap("n", "<leader>w", ":w<CR>")
+keymap("n", "<leader>q", ":q<CR>")
+keymap("n", "<leader>co", "<cmd>copen<CR>", { silent = true })
+keymap("n", "<leader>cc", "<cmf>cclose<CR>", { silent = true })
+
+require("lazy").setup({
+	-- カラースキーム
+	{
+		"talha-akram/noctis.nvim",
+		name = "noctis",
+        lazy = false,
+	},
+    -- Lualine 
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = {"nvim-tree/nvim-web-devicons"},
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "auto",
+                    icons_enabled = true,
+                    section_separators = "",
+                    component_separators = "",
+                },
+            })
+        end
+    },
+    -- Treesitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "lua",
+                    "vim",
+                    "bash",
+                    "python",
+                    "cpp",
+                    "json",
+                    "markdown",
+                },
+                highlight = { enable = true },
+                indent = { enable = true },
+                auto_install = true,
+            })
+        end
+    },
+    -- Telescope
+    {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local builtin = require("telescope.builtin")
+            -- ⏩ キーバインド（好みで変更可）
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+            vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+        end
+    },
+    -- toggleterm.nvim
+    {
+        "akinsho/toggleterm.nvim",
+        version = "*",
+        config = function()
+            require("toggleterm").setup {
+                open_mapping = [[<leader>tt]],
+                direction = "float",
+            }
+        end,
+    },
+    -- lazygit (toggletermと組み合わせるパターン
+    {
+        "kdheepak/lazygit.nvim",
+        dependencies = {"nvim-lua/plenary.nvim"},
+        config = function()
+            vim.keymap.set("n", "<leader>gg", function()
+                vim.cmd("LazyGit")
+            end, { desc = "open LazyGit" })
+        end
+    },
+    --  neo-tree
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies =  { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
+        },
+        config = function()
+            require("nvim-tree").setup({})
+        end,
+    },
+    -- autopairs
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({})
+        end
+    },
+    --  LSP + 補完まわり
+    {
+        --  LSPサーバー管理
+        "williamboman/mason.nvim",
+        build = ":MasonUpdate",
+        config = function()
+            require("mason").setup()
+        end,
+    },
+    {
+        -- masonとlspconfigの橋渡し
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = {"williamboman/mason.nvim"},
+    },
+    {
+        -- LSP本体
+        "neovim/nvim-lspconfig",
+    },
+    -- 補完エンジン本体
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
+        },
+    },
+})
+
+-- =====================
+-- カラースキーム適用
+-- =====================
+vim.cmd("colorscheme noctis_obscuro")
+
+
+-- lsp config読み出し
+require("config.lsp")
+require("config.cmp")
