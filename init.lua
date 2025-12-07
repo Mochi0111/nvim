@@ -18,8 +18,6 @@ keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
 keymap("n", "<leader>co", "<cmd>copen<CR>", { silent = true })
 keymap("n", "<leader>cc", "<cmf>cclose<CR>", { silent = true })
-keymap("n", "<leader>k", "<C-y>")
-keymap("n", "<leader>j", "<C-e>")
 
 require("lazy").setup({
 	-- カラースキーム
