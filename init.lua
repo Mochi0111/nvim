@@ -1,6 +1,7 @@
 -- =============== Lazy.nvim を読み込む ===============
 vim.opt.rtp:prepend("~/.local/share/nvim/lazy/lazy.nvim")
 vim.opt.clipboard = "unnamedplus"
+vim.opt.number = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.o.termguicolors = true
