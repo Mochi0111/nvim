@@ -29,7 +29,7 @@ source ~/.bashrc
 5. 必要パッケージのインストール
 ```
 sudo apt update
-sudo apt install -y neovim build-essential xclip
+sudo apt install -y build-essential xclip
 ```
 
 6. 必要文字フォントの設定
@@ -54,3 +54,7 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t /usr/local/bin/
 ```
 
+## Docker連携
+- 基本的にはホストでファイル編集して、コンテナ上で実行
+- formatterが機能しないのはpyright
+- pythonについてはローカルでもuv syncにより仮想環境を構築して、コンテナと同一のpython環境を作りローカルで作業
