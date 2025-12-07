@@ -17,6 +17,10 @@ keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
 keymap("n", "<leader>co", "<cmd>copen<CR>", { silent = true })
 keymap("n", "<leader>cc", "<cmf>cclose<CR>", { silent = true })
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+keymap("n", "<C-l>", "<C-w>l")
 
 require("lazy").setup({
 	-- カラースキーム
@@ -67,6 +71,7 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local telescope = require("telescope")
+            local actions = require("telescope.actions")
 
             telescope.setup({
                 defaults = {
@@ -75,7 +80,21 @@ require("lazy").setup({
                     layout_config = {
                         prompt_position = "top",
                     },
-	    	},
+                },
+                pickers = {
+                    buffers = {
+                        sort_mru = true,
+                        ignore_current_buffer = true,
+                        mappings = {
+                            i = {
+                                ["<C-d>"] = actions.delete_buffer,
+                            },
+                            n = {
+                                ["dd"] = actions.delete_buffer,
+                            },
+                        },
+                    },
+                },
             })
             -- ⏩ キーバインド（好みで変更可）
             local builtin = require("telescope.builtin")
