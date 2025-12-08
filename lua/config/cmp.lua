@@ -13,7 +13,7 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete(), -- 補完メニューを出す
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Enterで確定
-        ["<C-e>"] = cmp.mapping.abort(), -- 補完キャンセル 
+        ["<C-]>"] = cmp.mapping.abort(), -- 補完キャンセル 
 
         -- Tab / S-tab で候補 or スニペットを移動
         ["<Tab>"] = cmp.mapping(function(fallback)
