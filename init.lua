@@ -13,7 +13,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local keymap = vim.keymap.set
-keymap("i", "<S-Tab>", "<C-d>")
 keymap("n", "<Space>", "<Nop>", {silent = true})
 keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
