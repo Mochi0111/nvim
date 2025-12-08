@@ -34,9 +34,11 @@ sudo apt install -y build-essential xclip
 
 6. 必要文字フォントの設定
 ```
+sudo mkdir -p /usr/share/fonts/JetBrainsMono
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-unzip JetBrainsMono.zip
+unzip JetBrainsMono.zip -d /usr/share/fonts/JetBrainsMono
 fc-cache -fv
+rm JetBrainsMono.zip
 ```
 
 7. ターミナルへのフォント適用
