@@ -26,13 +26,27 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 source ~/.bashrc 
 ```
 
-5. 必要パッケージのインストール
+5. lazy.nvimのインストール (nvimプラグイン管理ツール)
+```
+git clone https://github.com/folke/lazy.nvim.git \
+  ~/.local/share/nvim/lazy/lazy.nvim
+```
+
+6. 必要パッケージのインストール
 ```
 sudo apt update
 sudo apt install -y build-essential xclip
 ```
 
-6. 必要文字フォントの設定
+LSPがNode.jsで作られているためnpm, node.jsも入れる
+```
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+7. 必要文字フォントの設定
 ```
 sudo mkdir -p /usr/share/fonts/JetBrainsMono
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
@@ -41,13 +55,13 @@ fc-cache -fv
 rm JetBrainsMono.zip
 ```
 
-7. ターミナルへのフォント適用
+8. ターミナルへのフォント適用
 - ターミナル右上のハンバーガーマーク->設定->サイドメニューで適用されているプロファイル選択
 - フォントで"JetBrainsMono Nert Font"を選択
 - 一度全てのターミナルを閉じる
 - 再度ターミナルを起動してフォントが直っていればOK
 
-8. lazygitのインストール<br>
+9. lazygitのインストール<br>
 参考URL：https://github.com/jesseduffield/lazygit
 ```
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
