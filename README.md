@@ -77,13 +77,13 @@ tmux: ターミナル管理ツール<br><br>
 ```
 sudo apt install tmux
 ```
-2. カラー定義確認
+2. カラー定義確認<br>
 以下実行してterminfoの内容が並べばOK
 ```
 infocmp tmux-256color
 ```
-3. ~/.tmux.conf定義
-※一緒に便利なキーバインドも定義
+3. ~/.tmux.conf定義<br>
+※一緒に便利なキーバインドも定義<br>
 以下内容を"\~/.tmux.conf"に記載
 ```
 set -g mouse on
@@ -110,3 +110,21 @@ tmux kill-server
 - 基本的にはホストでファイル編集して、コンテナ上で実行
 - formatterが機能しないのはpyright
 - pythonについてはローカルでもuv syncにより仮想環境を構築して、コンテナと同一のpython環境を作りローカルで作業
+
+## 【おまけ】Ubuntuターミナルカラー設定
+公式URL：https://gogh-co.github.io/Gogh/
+
+1.Goghインストール<br>
+Gogh: Gnone Terminal用のカラースキーム定義集
+```
+bash -c  "$(wget -qO- https://git.io/vQgMr)" 
+```
+2. インストールしたいカラースキーム選択<br>
+カラースキームの一覧が表示されるため先頭の数字を入力<br>
+複数入れたい場合はスペースをあけて記載<br>
+例) 37 38 39 49 60 75 196 234<br>
+
+3. ターミナルへの適用<br>
+- ターミナル右上のハンバーガー(三本線)から設定またはpreferencesを選択
+- インストールしたカラースキームがサイドメニューに並んでいるため,右クリックしてdefaultのものに設定
+- フォントの設定をJetBrainのものに
