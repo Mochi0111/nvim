@@ -92,13 +92,13 @@ setw -g mode-keys vi
 set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",xterm-256color:RGB"
 
-bind -n C-h select-pane -L
-bind -n C-j select-pane -D
-bind -n C-k select-pane -U
-bind -n C-l select-pane -R
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
 
-bind -n M-h split-window -h
-bind -n M-v split-window -v
+bind -n M-e split-window -h
+bind -n M-o split-window -v
 ```
 4. tmux再起動 ※起動しているtmuxセッションなければSkip
 ```
